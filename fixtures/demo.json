@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "project": "reviews-into-fixes",
+  "as_of": "2026-10-04T12:00:00Z",
+  "product": "Harbor",
+  "areas": [
+    {
+      "id": "setup",
+      "label": "Setup",
+      "aliases": ["setup"],
+      "next_check": "Repeat setup from a fresh test account and record step 3."
+    },
+    {
+      "id": "export",
+      "label": "Export",
+      "aliases": ["CSV export"],
+      "next_check": "Confirm export requirements with the product owner."
+    }
+  ],
+  "known_issues": [
+    {
+      "id": "setup_3",
+      "area_id": "setup",
+      "title": "Setup stops at step 3",
+      "status": "open",
+      "symptom_phrases": ["stops at step 3"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "r1", "kind": "review", "role": "review",
+      "url": "https://example.com/reviews/r1", "title": "Synthetic setup report",
+      "text": "Setup stops at step 3.", "status": "collected",
+      "observed_at": "2026-10-04T10:00:00Z", "published_at": null, "provider_date": null,
+      "record_id": "R1", "record_id_origin": "operator", "provenance": "synthetic_fixture"
+    },
+    {
+      "id": "r2", "kind": "review", "role": "review",
+      "url": "https://example.com/reviews/r2", "title": "Synthetic export request",
+      "text": "Please add CSV export.", "status": "collected",
+      "observed_at": "2026-10-04T10:00:00Z", "published_at": null, "provider_date": null,
+      "record_id": "R2", "record_id_origin": "operator", "provenance": "synthetic_fixture"
+    },
+    {
+      "id": "r3", "kind": "review", "role": "review",
+      "url": "https://example.com/reviews/r3", "title": "Synthetic documentation report",
+      "text": "The setup instructions are unclear how to activate it.", "status": "collected",
+      "observed_at": "2026-10-04T10:00:00Z", "published_at": null, "provider_date": null,
+      "record_id": "R3", "record_id_origin": "operator", "provenance": "synthetic_fixture"
+    },
+    {
+      "id": "r4", "kind": "review", "role": "review",
+      "url": "https://example.com/reviews/r4", "title": "Synthetic positive report",
+      "text": "Setup works fine.", "status": "collected",
+      "observed_at": "2026-10-04T10:00:00Z", "published_at": null, "provider_date": null,
+      "record_id": "R4", "record_id_origin": "operator", "provenance": "synthetic_fixture"
+    },
+    {
+      "id": "help", "kind": "page", "role": "product_instructions",
+      "url": "https://example.com/help", "title": "Synthetic help page",
+      "text": "## Setup\n\nComplete setup by selecting Activate at step 3.", "status": "collected",
+      "observed_at": "2026-10-04T10:00:00Z", "published_at": null, "provider_date": null,
+      "record_id": null, "record_id_origin": "none", "provenance": "synthetic_fixture"
+    }
+  ]
+}

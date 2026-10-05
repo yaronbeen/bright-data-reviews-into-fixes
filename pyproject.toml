@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools==81.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reviews-into-fixes"
+version = "0.1.0"
+description = "Turn review reports into evidence-backed suggested investigation checks"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+license = "MIT"
+authors = [{name = "Yaron Been"}]
+keywords = ["reviews", "product", "bright-data", "evidence"]
+
+[project.scripts]
+reviews-into-fixes = "reviews_into_fixes.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["reviews_into_fixes*"]
+
+[project.optional-dependencies]
+test = ["pytest==9.0.2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

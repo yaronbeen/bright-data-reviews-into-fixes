@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env*
+build/
+dist/
+*.egg-info/
+
+# Real evidence, approvals, receipts, and generated private reports stay local.
+evidence/
+private/
+approvals/
+receipts/
+.reviews-into-fixes-consumed/
+.reviews-into-fixes-recovery/
+reviews-into-fixes/recovery/
+reviews-into-fixes/approval-consumption/
+outputs/
+*.library.json
+*.approval.json
+*.receipt.json
+*.private.json
+*.recovery.library.json

@@ -29,7 +29,32 @@ The source suite and CLI subprocesses ran with a sanitized environment and libse
 
 The secret scan targeted only `git ls-files --cached --others --exclude-standard`, without scanner exclusions, with verification and updates disabled. The additional private-key/provider/GitHub/AWS/bearer fixed-pattern scan found no matches. The exact R3 wheel still hashes to `21bee0cc67f25a00db7e9a7c4b794fb567357d9165847fc04a9b0fa83e9a72b9`; all 26 bound source/test/fixture/configuration checksums returned `OK`.
 
-Local Git already existed on `main`, with no commits, empty index, and no remote. Authenticated GitHub owner was verified as `yaronbeen`; the exact target returned 404 before creation. Normal executable pre-commit/pre-push hooks are configured and will not be bypassed. Public visibility, pushed HEAD, unauthenticated clone, and Python 3.11/3.12 CI are post-push checks, not yet claimed by this preflight.
+Local Git already existed on `main`, with no commits, empty index, and no remote. Authenticated GitHub owner was verified as `yaronbeen`; the exact target returned 404 before creation. Normal executable pre-commit/pre-push hooks were configured and not bypassed. The following post-push record supersedes this preflight's then-pending publication checks.
+
+## Public Publication Verification
+
+- Public repository: https://github.com/yaronbeen/bright-data-reviews-into-fixes. `gh repo view` returned `visibility: PUBLIC`, `isPrivate: false`, and default branch `main`.
+- Source publication commit: `869e165cc14a9b6ec21de9d813524ce0dec1edab` (`Publish Reviews Into Fixes showcase`). Local HEAD, GitHub `refs/heads/main`, and the unauthenticated clone matched this exact commit. Subsequent closeout changes affect release records only, not source, tests, CI, fixtures, README, or the approved skill/docs.
+- Before committing, the actual 55-file staged inventory was checked: six package modules, nine existing test modules, six invented fixture/golden files, 12 handovers, and the intended package/configuration/project/solution/skill documentation. Every staged blob matched its working file; all 26 R3 bound blobs and six approved documentation blobs matched their recorded hashes. No symlinks, generated artifacts, wheels/candidates, environments, caches, actual approval/receipt/library files, or private evidence were staged.
+- Normal commit and push hooks ran; no hook bypass, scanner exception, or amend was used, and no global/hook Git configuration was changed. `gh repo create --public --source /home/yaron/projects/bright-data-reviews-into-fixes --remote origin --push` created the exact repository and established `main` tracking `origin/main`.
+- Unauthenticated raw README, skill, and checked-example downloads matched their approved SHA-256 values, respectively `f841b9302f09e76caf456b13c2ffdc0938ca60ab4db35d37b7370266503375b8`, `e9379343fc3e8602b5101bdb242c5d86ec0afdc3313d4160718345bbd3cf7a25`, and `cfcdd7769ece5bcbe3dc383d368e3efe12846a26917bd37d1d695eef2c84d168`.
+- Fresh unauthenticated HTTPS clone: `/tmp/opencode/reviews-publication-20261005-shDNSV/public-clone`. Clone used a credential-free environment and temporary home, disabled system/global Git configuration, an empty credential helper, and no terminal prompt. Test/CLI runs asserted the clone package path and denied network syscalls; they did not import the original project source.
+
+```text
+Unauthenticated public clone suite; clone import asserted
+187 passed in 1.70s
+Unauthenticated clone offline CLI=9/9 PASS; goldens=3/3 PASS
+collisions unchanged; dry/error outputs absent; requests=0
+network syscalls denied
+
+GitHub CI, source publication commit:
+Python 3.12: 187 passed in 0.81s
+Python 3.11: 187 passed in 0.88s
+Both package installs, wheel builds, and console versions passed
+reviews-into-fixes 0.1.0
+```
+
+Observed source-commit CI: https://github.com/yaronbeen/bright-data-reviews-into-fixes/actions/runs/37362729372, conclusion `success`, both jobs completed successfully. GitHub emitted non-blocking action-runtime deprecation and upcoming `ubuntu-latest` migration annotations; these are follow-up maintenance, not failed checks. The documentation-only closeout push receives its own normal hooks and final-HEAD checks. No paid/live provider request, global skill installation, or other repository action occurred. Live Web Unlocker remains disabled and provider/account compatibility remains live-unverified.
 
 ## Current Candidate R3
 

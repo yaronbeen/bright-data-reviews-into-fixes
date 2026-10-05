@@ -33,4 +33,13 @@ The user explicitly authorizes public creation and push to the exact target abov
 
 Publish reviewed source, all nine existing test modules, invented fixtures/goldens, package/CI configuration, README/license/project documentation, historical handovers/solutions, and approved local skills/docs only. Exclude wheels, all candidate directories/installations, build output, environments, caches, distribution metadata, real approvals/receipts/libraries, private evidence, and external verification artifacts. Normal hooks are mandatory; no scanner exceptions, bypass, or amend is authorized.
 
-Public visibility/HEAD, unauthenticated clone execution, and existing Python 3.11/3.12 CI remain execution checks to record after the push. No new feature, test matrix, paid/live call, other repository action, or global skill installation is authorized. Live Web Unlocker remains disabled; other provider paths are mock-tested and live-unverified. The exact R3 candidate and earlier evidence remain intact locally.
+No new feature, test matrix, paid/live call, other repository action, or global skill installation is authorized. Live Web Unlocker remains disabled; other provider paths are mock-tested and live-unverified. The exact R3 candidate and earlier evidence remain intact locally.
+
+## Observed Publication
+
+- Public repository: https://github.com/yaronbeen/bright-data-reviews-into-fixes, default branch `main`.
+- Source publication commit: `869e165cc14a9b6ec21de9d813524ce0dec1edab`. GitHub/public-clone HEAD matched; the intended 55-file staged inventory was verified with no private/generated payloads.
+- The README, skill, and checked example are publicly readable without authentication and match approved hashes.
+- Fresh unauthenticated public clone: all 187 tests passed; nine offline CLI checks and three goldens passed with zero requests and network denial.
+- Python 3.11 and 3.12 CI both passed 187 tests, package install/build, and console entry checks: https://github.com/yaronbeen/bright-data-reviews-into-fixes/actions/runs/37362729372.
+- A documentation-only closeout records these observations without changing the R3-bound source/tests/fixtures/configuration or approved README/skill/docs. Normal hooks and final-HEAD checks apply to that push too. See `/home/yaron/projects/bright-data-reviews-into-fixes/VERIFICATION.md`.

@@ -2,7 +2,7 @@
 
 ## P0 - Next Session
 
-- None. The user reports final QA/security/brand SHIP and separate skill approvals, and explicitly authorizes public publication of `yaronbeen/bright-data-reviews-into-fixes`. Normal publication execution checks are tracked in `/home/yaron/projects/bright-data-reviews-into-fixes/VERIFICATION.md` and the latest handover, not an outstanding review gate.
+- None. Final user-reported QA/security/brand SHIP and separate skill approvals are recorded. Public source publication, unauthenticated clone checks, and Python 3.11/3.12 CI passed; actual evidence is in `/home/yaron/projects/bright-data-reviews-into-fixes/VERIFICATION.md` and the latest handover.
 
 ## P1 - This Week
 
@@ -13,7 +13,7 @@ These are explicitly deferred live-integration tasks, not blockers for the appro
 
 ## P2 - When Convenient
 
-- None.
+- Update `actions/checkout@v4` and `actions/setup-python@v5` in a separate maintenance change: GitHub reports their Node.js 20 runtime as deprecated and currently forces Node.js 24. Current Python 3.11/3.12 CI passes; this annotation is not a showcase release blocker.
 
 ## P3 - Nice To Have
 
@@ -30,3 +30,4 @@ These are explicitly deferred live-integration tasks, not blockers for the appro
 - 2026-10-05: Fixed the independently reproduced raw-port/canonical-target resume exclusion without changing its test. Final independent R3 source and clean-wheel suites pass all 187 cases; the representative canonical case passes in both environments. Historical RED evidence remains preserved outside the publication payload.
 - 2026-10-05: User reports final core QA/security/brand SHIP, including the prior provider, query-free target, cumulative-retention, CSV, and collect/resume persistence review gates. Separate skeptic/engineer/brand approvals cover the frozen skills and README sections. Reviewer artifact paths were not supplied; no new independent review is claimed here.
 - 2026-10-05: The user's explicit `bright-data` repository-name requirement supersedes the earlier brand-neutral remote-name instruction. Public target is `yaronbeen/bright-data-reviews-into-fixes`; neutral package/CLI names and the independent-showcase disclaimer remain unchanged.
+- 2026-10-05: Created and pushed the authorized public repository with normal hooks. Verified the actual 55-file inventory, public visibility/HEAD and approved README/skill/example bytes, fresh unauthenticated clone with all 187 tests/nine offline CLI checks/three goldens, and passing Python 3.11/3.12 CI. No private or generated payloads were published.

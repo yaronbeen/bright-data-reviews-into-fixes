@@ -4,13 +4,17 @@ Turn review complaints into suggested investigation checks for your product team
 
 GitHub repository target: [yaronbeen/bright-data-reviews-into-fixes](https://github.com/yaronbeen/bright-data-reviews-into-fixes). The Python distribution and CLI remain `reviews-into-fixes`; the Python module remains `reviews_into_fixes`.
 
-This is an independent showcase of optional Bright Data integration, not an official Bright Data project. The descriptive `bright-data-` repository prefix does not imply affiliation with or endorsement by Bright Data.
+Somewhere in your reviews is the next bug your team should chase.
 
-This small, deterministic CLI joins selected review sentences to operator-defined product areas, known-issue phrases, and supplied instruction passages. It produces evidence-backed investigation cards, not validated defects, runnable test procedures, severity scores, prevalence estimates, or a product-priority ranking.
+4,000 reviews. 12 sentences worth acting on. This small deterministic CLI reads the review sentences you select, joins them to the product areas and known issues you already track, and hands your team a short list of specific next checks - each one tied to the sentence that triggered it.
 
-**Offline status:** verified against invented fixtures. **Live Bright Data status:** adapter implemented but not verified against a paid/live account.
+No model. No prompts. No network. Exact phrases in, evidence-linked cards out.
 
-## What It Produces
+## What You Get
+
+- **Cards you can trace.** Every investigation card cites the exact review sentence it came from, with its source, block ID, observation date, and a locally computed snapshot hash. Nothing is paraphrased or inferred.
+- **Your known issues, front and center.** Complaints are matched against the issues your team already tracks, so you see `similar_to_open_issue`, `similar_to_resolved_issue`, or clear evidence that a report is new before anyone opens a ticket.
+- **A next check, not a severity guess.** Every card carries one operator-defined next step, and contrary reports stay visible instead of being averaged away. No severity score, no prevalence estimate, no root-cause claim.
 
 The invented Harbor fixture produces this setup card:
 
@@ -24,34 +28,30 @@ Counterevidence: Setup works fine.
 
 The three selected complaint cards remain in source order. They are not a ranking, and the positive setup report is retained rather than averaged away.
 
-## Offline Quickstart
+## Try It
 
-Python 3.11 or newer is required. Analysis has no runtime dependencies, credentials, model calls, or network calls.
-Run these commands from the repository root:
+Python 3.11 or newer. No keys, no install, no network. Run this once from the repository root and see the output for yourself:
 
 ```bash
 python3 -m reviews_into_fixes analyze fixtures/demo.json --out-dir /tmp/reviews-into-fixes-demo
 ```
 
-Outputs:
+That writes three files: `report.json` (machine-readable analysis, citations, source index, warnings, overflow cards), `fixes.md` (scoped human review with an evidence appendix and synthetic-data banner), and `fixes.csv` (primary cards with spreadsheet-formula protection).
 
-- `report.json`: machine-readable local analysis, citations, source index, warnings, and overflow cards.
-- `fixes.md`: scoped human review with evidence appendix and synthetic-data banner.
-- `fixes.csv`: primary cards with spreadsheet-formula protection.
-
-Preview validation without writing:
+Preview without writing, install the console script, and run the tests:
 
 ```bash
 python3 -m reviews_into_fixes analyze fixtures/demo.json --out-dir /tmp/not-written --dry-run
-```
 
-Install the console script in an isolated environment:
-
-```bash
 python3 -m venv /tmp/reviews-into-fixes-venv
 /tmp/reviews-into-fixes-venv/bin/python -m pip install .
 /tmp/reviews-into-fixes-venv/bin/reviews-into-fixes --version
+
+python3 -m pip install -r requirements-dev.lock
+python3 -m pytest -q
 ```
+
+Bright Data integration is optional; the demo runs offline.
 
 Existing outputs are never overwritten unless `--overwrite` is supplied.
 

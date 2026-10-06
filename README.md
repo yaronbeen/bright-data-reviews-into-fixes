@@ -1,12 +1,10 @@
-# Reviews Into Fixes with Bright Data integration
+# Bright Data Reviews Into Fixes
 
-Turn review complaints into suggested investigation checks for your product team.
+Collect public Amazon reviews with Bright Data. Feed the resulting JSON export to this CLI and get evidence-linked investigation cards your product team can check.
 
-Somewhere in your reviews is the next bug your team should chase.
+The CLI joins selected review sentences to your product areas, known issues, and supplied instructions. Each card points back to the exact sentence that triggered it.
 
-4,000 reviews. 12 sentences worth acting on. This small deterministic CLI reads the review sentences you select, joins them to the product areas and known issues you already track, and hands your team a short list of specific next checks - each one tied to the sentence that triggered it.
-
-No model. No prompts. No network. Exact phrases in, evidence-linked cards out.
+No model. No prompts. Local, deterministic analysis. Exact phrases in, evidence-linked cards out.
 
 ## What You Get
 
@@ -26,15 +24,35 @@ Counterevidence: Setup works fine.
 
 The three selected complaint cards remain in source order. They are not a ranking, and the positive setup report is retained rather than averaged away.
 
-## Try It
+## Quickstart: Bright Data Export
 
-Python 3.11 or newer. No keys, no install, no network. Run this once from the repository root and see the output for yourself:
+Run Bright Data's Amazon Reviews Scraper and save its JSON records as `reviews.json`. The import expects a JSON array; each usable record must include `review_text` and may include `review_header`, `review_id`, and `review_posted_date`. Keep the Amazon product URL used for collection handy. From the repository root, normalize the export and analyze it:
+
+```bash
+python3 -m reviews_into_fixes import-provider reviews.json \
+  --kind amazon_reviews --role review \
+  --source-url https://www.amazon.com/dp/B012345678 \
+  --observed-at 2026-10-06T10:00:00Z \
+  --out /tmp/reviews.library.json
+
+python3 -m reviews_into_fixes analyze product.json \
+  --sources /tmp/reviews.library.json \
+  --out-dir /tmp/reviews-into-fixes-output
+```
+
+`product.json` supplies the areas, known issues, instructions, and any other sources you want considered; `fixtures/demo.json` shows the complete input shape. The output directory contains `report.json`, `fixes.md`, and `fixes.csv`. Imported records are marked `operator_supplied`; the CLI does not verify their origin or completeness. Reviewer names, profiles, and other non-allowlisted metadata are discarded, but review text can still contain personal or sensitive details.
+
+Bright Data's Amazon Reviews Scraper API route is also implemented for explicitly approved live collection of up to two Amazon.com product/review URLs and up to 25 requested reviews per URL. It requires `--live --accept-charges`, a single-use approval file, and `BRIGHT_DATA_API_KEY`. The route is live-unverified; no account or live call is claimed here. Live Web Unlocker page collection fails closed because final redirect targets cannot be verified. Public page text can be imported locally with `import-provider --kind web_page --role product_instructions` instead.
+
+## Offline Demo
+
+For a quick try without a Bright Data export, Python 3.11 or newer is enough. This invented fixture runs offline and writes three sample output files:
 
 ```bash
 python3 -m reviews_into_fixes analyze fixtures/demo.json --out-dir /tmp/reviews-into-fixes-demo
 ```
 
-That writes three files: `report.json` (machine-readable analysis, citations, source index, warnings, overflow cards), `fixes.md` (scoped human review with an evidence appendix and synthetic-data banner), and `fixes.csv` (primary cards with spreadsheet-formula protection).
+The demo illustrates the CLI; the Bright Data export-to-investigation workflow above is the product use case.
 
 Preview without writing, install the console script, and run the tests:
 
@@ -48,8 +66,6 @@ python3 -m venv /tmp/reviews-into-fixes-venv
 python3 -m pip install -r requirements-dev.lock
 python3 -m pytest -q
 ```
-
-Bright Data integration is optional; the demo runs offline.
 
 Existing outputs are never overwritten unless `--overwrite` is supplied.
 
@@ -99,9 +115,9 @@ The top-level JSON fields are `schema_version`, `project`, optional `as_of`, `pr
 
 Source text is normalized into numbered blocks. Citations contain an exact source substring, source/block IDs, URL, observation date, record ID where present, and a locally computed SHA-256 snapshot hash. A hash identifies bytes; it does not establish truth.
 
-## Offline Provider Import
+## Imported Provider Data
 
-An already-authorized Amazon or Google Maps review export can be normalized without a network request:
+An already-authorized Amazon or Google Maps review export can be normalized without a network request. Amazon review imports must be a JSON array using Bright Data's Amazon Reviews Scraper record fields (`review_text`, optionally `review_header`, `review_id`, `review_posted_date`); the file's source is not authenticated or certified:
 
 ```bash
 python3 -m reviews_into_fixes import-provider \
@@ -114,9 +130,9 @@ python3 -m reviews_into_fixes import-provider \
 
 The public fixture is invented. Import labels data `operator_supplied`; it does not certify that a file came from Bright Data. Normalization keeps allowlisted evidence fields and discards author names, profiles, avatars, reactions, addresses, and replies.
 
-## Optional Bright Data Scraper API Integration
+## Bright Data Scraper API Collection
 
-Bright Data Scraper API retrieval is opt-in. Planning makes zero requests:
+The live scraper route is explicitly gated. Planning makes zero requests:
 
 ```bash
 python3 -m reviews_into_fixes collect \

@@ -1,6 +1,0 @@
-skills/review-next-check/SKILL.md
-docs/skills/review-next-check-example.md
-docs/skills/validation.md
-docs/skills/review-manifest.txt
-docs/skill-readme-section.md
-README.md

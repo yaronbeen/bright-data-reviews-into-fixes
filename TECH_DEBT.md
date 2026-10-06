@@ -2,24 +2,25 @@
 
 ## P0 - Next Session
 
-- None. Final user-reported QA/security/brand SHIP and separate skill approvals are recorded. Public source publication, unauthenticated clone checks, and Python 3.11/3.12 CI passed; actual evidence is in `/home/yaron/projects/bright-data-reviews-into-fixes/VERIFICATION.md` and the latest handover.
+- Top-level lightweight triple review of the local skills-only conversion is pending. Do not commit, push, or change remote metadata before review and authorization. Historical application approvals do not approve the rewritten skill.
 
 ## P1 - This Week
 
-- If explicitly authorized, run one minimal bounded Amazon reviews live smoke test; record response-contract evidence without saving raw private bodies.
-- Keep live Web Unlocker disabled until an official provider mechanism exposes verifiable final-target redirect scope; then require an independent security review before enabling it.
-
-These are explicitly deferred live-integration tasks, not blockers for the approved offline showcase. No live smoke test is authorized in this publication pass.
+- No further collection is required for conversion. The external exercise produced a cited investigation memo; present-day product behavior remains untested, and any proposed check stays a human task. Do not duplicate the worker's calls or treat static checks as live certification.
 
 ## P2 - When Convenient
 
-- Update `actions/checkout@v4` and `actions/setup-python@v5` in a separate maintenance change: GitHub reports their Node.js 20 runtime as deprecated and currently forces Node.js 24. Current Python 3.11/3.12 CI passes; this annotation is not a showcase release blocker.
+- None for the small skills-only scope.
 
 ## P3 - Nice To Have
 
-- Provide a JSON Schema document generated from the written contract if users need editor validation.
+- None. Do not reintroduce an application, mock datasets, or a report schema.
 
 ## Resolved Items
+
+- 2026-10-06: Received the independent bounded real-data investigation result (PASS for the narrow memo), clarified historical-date/sample-count/capture-time rules without new collection, and kept all source evidence external at `/home/yaron/.claude/data/brightdata-drafts/2026-10-06-brightdata-real-business-validation.md`. Top-level release review remains separate.
+
+- 2026-10-06: Retired application-specific debt with the explicitly authorized retirement of the Python product, synthetic fixtures, release records, and Python CI. Historical resolutions below remain as history, not current run instructions. Git history and private ignored local files are preserved.
 
 - 2026-10-05: Created the package, deterministic analysis, renderers, offline fixtures, CLI, optional bounded ingestion boundary, CI, and first-session documentation.
 - 2026-10-05: Constrained setuptools package discovery and verified a wheel install in a clean virtual environment without network access.

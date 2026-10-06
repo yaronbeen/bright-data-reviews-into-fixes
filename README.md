@@ -1,28 +1,26 @@
 # Reviews Into Fixes
 
-Turn Amazon reviews into one clear suggestion for what your product team should investigate next.
+Turn a small set of public reviews into one useful question for your product team to investigate next.
 
-Your agent collects a small review sample with [Bright Data](https://brightdata.com), then uses the bundled skill to prepare an evidence-backed memo.
+Your agent collects actual review text through [Bright Data](https://brightdata.com), groups concrete complaints separately from feature requests and confusing instructions, and keeps contrary reports visible. You get a next check, not an invented bug diagnosis or roadmap ranking.
 
 ## What You Get
 
-- One suggested next check, with exact review quotes and source links.
-- Known-issue matches and contrary reports, so your team can check the context.
-- Other candidates and unanswered questions for a product-team discussion.
+- A short complaint, request, and documentation-gap summary with exact quotes.
+- One practical investigation question and suggested next check.
+- Counterexamples, other candidates, and missing evidence with source links.
 
 ## Give This To Your Agent
 
 ```text
-For [Amazon product URL or ASIN], collect up to 20 reviews through my
-configured Bright Data scraper or MCP. Use [product context file:
-product areas, known issues and proposed checks], then follow
-review-next-check. Return one next-check memo with supporting quotes,
-contrary reports and other candidates. Keep real source links, dates
-and unknowns. If collection is unavailable, ask me for a Bright Data export.
+Use review-next-check for [product/service URL]. Collect up to 20 public
+reviews from [review source URLs] through my configured Bright Data tools.
+Use [optional product context, known issues, or help-page URL]. Group the
+concrete complaints, requests, and confusing instructions. Return one
+investigation question and next check, with quotes, counterexamples,
+source URLs, capture times, and unknowns. If Bright Data is not connected,
+ask me to connect it and stop. Do not create tickets or claim a confirmed bug.
 ```
 
-Skill: [review-next-check](skills/review-next-check/SKILL.md).
-
-In the [checked example (invented data)](docs/skills/review-next-check-example.md), the memo proposes checking setup step 3 while retaining both "Setup stops at step 3" and "Setup works fine." It suggests an investigation, not a confirmed fix.
-
-[Technical guide](docs/technical-guide.md)
+Read the [review-next-check skill](skills/review-next-check/SKILL.md).
+Connect your agent using the [official Bright Data MCP setup](https://docs.brightdata.com/products/mcp-server/remote/quickstart) or this [short connection guide](docs/technical-guide.md).

@@ -1,5 +1,19 @@
 # Learnings
 
+## Current Skills-Only Workflow - 2026-10-06
+
+- The user explicitly retired the Python product in favor of one simple Bright Data-backed business skill. Historical application decisions below are not current operating instructions.
+- Source evidence must be retrieved through configured Bright Data tools in the current agent session. Missing access means connect and stop, not use an export, mock, or another provider.
+- Visible review text can support grouping; an aggregate score or summary cannot substitute for individual observations. Inspect actual tool fields, links, ordering, and capture limitations.
+- Review grouping is semantic and proposes plain-language areas. Counterexamples remain visible, and the deliverable is one investigation question plus a proposed check, not a verified defect.
+- Official MCP setup and tools documentation was fetched on 2026-10-06. `chub` was unavailable, so current official pages were read directly. Static documentation checks do not establish live functionality.
+
+- Independent real-data exercise: PASS for one investigation memo, not a current defect. Historical contributor dates govern interpretation even when capture is recent; usable body counts and contrary product context must remain explicit.
+- Exact capture instants/timezones can be unavailable. Preserve only actual supplied/observed times or known observation bounds; do not manufacture precision. Public validation examples are not user business facts.
+- External evidence remains at `/home/yaron/.claude/data/brightdata-drafts/2026-10-06-brightdata-real-business-validation.md`. No source excerpts or validation dataset were copied into the repository, and no calls were repeated for the rule clarification.
+
+## Historical Application Learnings
+
 ## 2026-10-05
 
 - Exact sentence-level positive cues must suppress a defect cue only in that sentence. A separate defect sentence remains eligible.

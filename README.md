@@ -2,8 +2,6 @@
 
 Turn review complaints into suggested investigation checks for your product team.
 
-GitHub repository target: [yaronbeen/bright-data-reviews-into-fixes](https://github.com/yaronbeen/bright-data-reviews-into-fixes). The Python distribution and CLI remain `reviews-into-fixes`; the Python module remains `reviews_into_fixes`.
-
 Somewhere in your reviews is the next bug your team should chase.
 
 4,000 reviews. 12 sentences worth acting on. This small deterministic CLI reads the review sentences you select, joins them to the product areas and known issues you already track, and hands your team a short list of specific next checks - each one tied to the sentence that triggered it.
@@ -193,7 +191,7 @@ Provider API shapes were checked against the current Bright Data Web Unlocker AP
 - https://docs.brightdata.com/api-reference/scrapers/management-apis/monitor-progress
 - https://docs.brightdata.com/api-reference/scrapers/delivery-apis/download-snapshot
 
-Uses Bright Data for optional public-data retrieval. Analysis and decisions are local application logic. Not affiliated with or endorsed by Bright Data.
+Uses [Bright Data](https://brightdata.com) for optional public-data retrieval. Analysis and decisions are local application logic. Not affiliated with or endorsed by Bright Data.
 
 ## License
 

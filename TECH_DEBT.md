@@ -2,7 +2,7 @@
 
 ## P0 - Next Session
 
-- Top-level lightweight triple review of the local skills-only conversion is pending. Do not commit, push, or change remote metadata before review and authorization. Historical application approvals do not approve the rewritten skill.
+- None. Skills-only publication and public-byte verification passed; see the newest handover.
 
 ## P1 - This Week
 
@@ -17,6 +17,8 @@
 - None. Do not reintroduce an application, mock datasets, or a report schema.
 
 ## Resolved Items
+
+- 2026-10-07: Published the skills-only conversion, verified all three primary documents anonymously against approved hashes, confirmed five local links and the exact remote tree, and confirmed zero current workflows or conversion-commit CI runs/checks. Review and publication gates are resolved; no new business-source calls were made.
 
 - 2026-10-06: Received the independent bounded real-data investigation result (PASS for the narrow memo), clarified historical-date/sample-count/capture-time rules without new collection, and kept all source evidence external at `/home/yaron/.claude/data/brightdata-drafts/2026-10-06-brightdata-real-business-validation.md`. Top-level release review remains separate.
 

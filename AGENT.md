@@ -13,7 +13,7 @@ Inspect exact repository files with Read. Restrict any Grep to this repository d
 
 Reviews Into Fixes is a small business skill for product teams: group concrete public review complaints, distinguish requests and documentation confusion, retain counterexamples, and propose one investigation question and next check. Bright Data collection in the current agent session is mandatory. No application, mock dataset, or report prerequisite remains.
 
-Local conversion awaits the top-level lightweight triple review. The independent bounded real-data report records PASS for one investigation memo, not a current defect or release certification. Evidence remains outside the repository at `/home/yaron/.claude/data/brightdata-drafts/2026-10-06-brightdata-real-business-validation.md`; its public validation business is not the user's business. Date/partial-capture rules were clarified afterward without new collection. Previous application approvals and test counts do not validate the rewritten skill. Public identity remains `yaronbeen/bright-data-reviews-into-fixes`; no publication change is authorized in this pass.
+The skills-only workflow is published at https://github.com/yaronbeen/bright-data-reviews-into-fixes. Read the newest handover for publication checks. The independent bounded real-data exercise and final method reapplication support one investigation memo, not a current defect or release certification. Evidence remains outside the repository at `/home/yaron/.claude/data/brightdata-drafts/2026-10-06-brightdata-real-business-validation.md`; its public validation business is not the user's business.
 
 ## Architecture / Design
 
@@ -49,7 +49,7 @@ Earlier rows describe the retired application and remain unchanged as history. T
 
 Read `/home/yaron/projects/bright-data-reviews-into-fixes/skills/review-next-check/SKILL.md`, establish bounded real inputs, and collect through configured Bright Data tools before analysis. Follow the skill directly; there is no local application to run. Keep real evidence and credentials private.
 
-For documentation changes, check frontmatter, local links, one README request, absence of retired product assets, and `git diff --check`. These checks do not establish live functionality. Do not make business-source calls during this conversion; a separate worker owns real-data validation. No commits, pushes, or remote metadata changes before the top-level review and authorization.
+For documentation changes, check frontmatter, local links, one README request, absence of retired product assets, and `git diff --check`. For publication, verify anonymous public document bytes, the remote tree, and branch synchronization. These checks do not establish live functionality; business-source collection is not part of a publication audit.
 
 ## API References
 

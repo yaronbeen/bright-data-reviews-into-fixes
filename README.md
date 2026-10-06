@@ -207,7 +207,7 @@ Provider API shapes were checked against the current Bright Data Web Unlocker AP
 - https://docs.brightdata.com/api-reference/scrapers/management-apis/monitor-progress
 - https://docs.brightdata.com/api-reference/scrapers/delivery-apis/download-snapshot
 
-Uses [Bright Data](https://brightdata.com) for optional public-data retrieval. Analysis and decisions are local application logic. Not affiliated with or endorsed by Bright Data.
+Uses [Bright Data](https://brightdata.com) for public-data collection; analysis and decisions are local application logic.
 
 ## License
 

@@ -167,8 +167,13 @@ def test_help_and_version_entry_points(capsys):
     assert "0.1.0" in capsys.readouterr().out
 
 
-def test_distribution_and_cli_are_brand_neutral():
+def test_distribution_and_cli_are_brand_neutral(capsys):
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     assert metadata["project"]["name"] == "reviews-into-fixes"
     assert metadata["project"]["scripts"] == {"reviews-into-fixes": "reviews_into_fixes.cli:main"}
-    assert "with Bright Data integration" in (ROOT / "README.md").read_text().splitlines()[0]
+    with pytest.raises(SystemExit) as exc:
+        cli.main(["--help"])
+    assert exc.value.code == 0
+    assert "reviews-into-fixes" in capsys.readouterr().out
+    guide = (ROOT / "docs" / "technical-guide.md").read_text()
+    assert "https://docs.brightdata.com/api-reference/scrapers/e-commerce-apis/amazon-reviews-collect-by-url" in guide

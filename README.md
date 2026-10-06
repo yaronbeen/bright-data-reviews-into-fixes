@@ -1,10 +1,27 @@
-# Bright Data Reviews Into Fixes
+# Reviews Into Fixes with Bright Data integration
 
-Collect public Amazon reviews with Bright Data. Feed the resulting JSON export to this CLI and get evidence-linked investigation cards your product team can check.
+Give an agent the product context and a bounded review-collection request. The agent uses an available, configured Bright Data Amazon Reviews Scraper API/MCP tool, maps returned records into this repository's input schema, runs the local analysis, and follows the bundled `review-next-check` skill to write a cited investigation memo.
 
-The CLI joins selected review sentences to your product areas, known issues, and supplied instructions. Each card points back to the exact sentence that triggered it.
+```text
+Use the configured Bright Data Amazon Reviews Scraper API/MCP to collect up to 20 reviews for ASIN B012345678. Request newest reviews only if the configured tool documents that ordering, and disclose if ordering is unknown. Use the bundled skills/review-next-check/SKILL.md and product.json to create the report and return one prioritized investigation memo: select one primary Next Check, show its supporting and counterevidence, and place the remaining candidates and holds in an Other Candidates / Holds section with a shortlist of no more than 5 items. Include exact cited excerpts and source locators throughout. Preserve timestamps, source provenance, unknowns, warnings, and overflow. If you cannot access the configured Bright Data collection tool, stop and ask me for a Bright Data export; do not switch sources or collect unbounded data. Do not create tickets or claim a verified bug. If no per-review permalink is returned, say so and cite only the product URL actually available.
+```
 
-No model. No prompts. Local, deterministic analysis. Exact phrases in, evidence-linked cards out.
+The repo's skill analyzes a local `report.json`; it does not itself provide scraper credentials or a collection service. MCP collection requires a Bright Data scraper tool already available in the agent environment. The repository also has an explicitly gated direct Amazon Scraper API route, not a general-purpose app/page scraper. Its direct live path requires the repository's charge-acceptance and single-use approval gates, credentials, and supported Amazon.com targets; it is live-unverified. The agent should not try to bypass these gates.
+
+Bright Data is the collection layer. The local CLI applies deterministic, narrow phrase rules to supplied inputs; it does not infer sentiment, verify bugs, estimate prevalence, rank severity, or create tickets. The invented offline fixture below is a demo only.
+
+## Agent Workflow
+
+1. The user specifies an Amazon ASIN/product URL, a finite review count, and the local product context (`product.json`, with areas, known issues, and any selected instructions).
+2. The agent collects only that bounded scope through an available configured Bright Data Amazon Reviews Scraper API/MCP tool. If unavailable, it asks for a Bright Data Amazon Reviews Scraper JSON export and waits; it does not silently use another source or broaden collection.
+3. The agent maps records to the accepted source schema (`kind: "review"`, `role: "review"`, exact review text, title, record ID, published/provider date, observation timestamp, provenance, and source URL). Preserve a returned per-review permalink as that source's URL. If Bright Data supplies only the product URL, use that actual URL and disclose that an exact review permalink was not supplied. Never invent a locator or timestamp.
+4. The agent runs local analysis and follows [`review-next-check`](skills/review-next-check/SKILL.md) on its `report.json`. Return one prioritized investigation memo with a primary **Next Check**, its supporting evidence and counterevidence, and an **Other Candidates / Holds** section capped at five shortlisted items. Cite exact excerpts and locators; preserve warnings, overflow, and unknowns. If no candidate is usable, return a **Hold** rather than inventing a check.
+
+**Field names and mapping:** Bright Data's [Amazon Reviews Scraper API reference](https://docs.brightdata.com/api-reference/scrapers/e-commerce-apis/amazon-reviews-collect-by-url) documents product `url` input and optional `max_reviews`. Its response example shows names including `url`, `review_title`, `review_text`, and `review_date`; it does not establish that these are default fields returned for every account/configuration. The example's `url` is the product URL, not a review permalink; newest-first ordering is not specified. Treat raw field availability as unknown unless confirmed in the actual response.
+
+The repository's live adapter sends `custom_output_fields`=`url|review_id|review_text|review_header|review_posted_date` in the request body (`reviews_into_fixes/brightdata.py`). These are the adapter's requested output names, not a verified statement of Bright Data's raw dataset schema. The adapter normalizer reads `review_text`, `review_header`, `review_id`, and `review_posted_date`; it does not translate `review_title` to `review_header` or `review_date` to `review_posted_date`. Since live behavior is unverified, do not assume the requested custom names are accepted or returned, or claim the direct route successfully maps the documented response shape.
+
+The local normalized source fields are `text`, `title`, `record_id`, `published_at`, `provider_date`, `observed_at`, `url`, and `provenance`. The `import-provider` Amazon path accepts an input array using `review_text` and optional `review_header`, `review_id`, and `review_posted_date`; it normalizes those to local source fields, maps every imported record to the supplied product URL, and marks it `operator_supplied`. It does not directly accept `review_title` or `review_date`. If an actual export/MCP response contains those names, an agent may explicitly transform them to accepted import names (`review_title` to `review_header`, `review_date` to `review_posted_date`) before import, but only after verifying the values exist. The live adapter marks returned records `bright_data` but maps a single-product result to its approved product URL. Neither route provides a review permalink in the documented schema. Use an exact review URL only if the collector actually supplies one and the agent maps it into an accepted `sources[]` entry; never reinterpret the product URL as a review permalink. Bright Data responses are not proof of completeness.
 
 ## What You Get
 
@@ -24,9 +41,9 @@ Counterevidence: Setup works fine.
 
 The three selected complaint cards remain in source order. They are not a ranking, and the positive setup report is retained rather than averaged away.
 
-## Quickstart: Bright Data Export
+## For Offline Replay / CLI
 
-Run Bright Data's Amazon Reviews Scraper and save its JSON records as `reviews.json`. The import expects a JSON array; each usable record must include `review_text` and may include `review_header`, `review_id`, and `review_posted_date`. Keep the Amazon product URL used for collection handy. From the repository root, normalize the export and analyze it:
+For an existing Bright Data Amazon Reviews Scraper JSON export, the import expects a JSON array; each usable record must include `review_text` and may include `review_header`, `review_id`, and `review_posted_date`. Keep the Amazon product URL used for collection handy. `import-provider` assigns that product URL to imported records; it does not preserve per-record URLs. From the repository root, normalize the export and analyze it:
 
 ```bash
 python3 -m reviews_into_fixes import-provider reviews.json \
@@ -44,7 +61,7 @@ python3 -m reviews_into_fixes analyze product.json \
 
 Bright Data's Amazon Reviews Scraper API route is also implemented for explicitly approved live collection of up to two Amazon.com product/review URLs and up to 25 requested reviews per URL. It requires `--live --accept-charges`, a single-use approval file, and `BRIGHT_DATA_API_KEY`. The route is live-unverified; no account or live call is claimed here. Live Web Unlocker page collection fails closed because final redirect targets cannot be verified. Public page text can be imported locally with `import-provider --kind web_page --role product_instructions` instead.
 
-## Offline Demo
+## Offline Demo (Invented Fixture Only)
 
 For a quick try without a Bright Data export, Python 3.11 or newer is enough. This invented fixture runs offline and writes three sample output files:
 
@@ -52,7 +69,7 @@ For a quick try without a Bright Data export, Python 3.11 or newer is enough. Th
 python3 -m reviews_into_fixes analyze fixtures/demo.json --out-dir /tmp/reviews-into-fixes-demo
 ```
 
-The demo illustrates the CLI; the Bright Data export-to-investigation workflow above is the product use case.
+The demo illustrates offline CLI mechanics only; it is not collected review data and is not the product workflow.
 
 Preview without writing, install the console script, and run the tests:
 
@@ -75,7 +92,7 @@ If a collect or resume request was attempted but writing the requested library f
 
 **Next Check, Not Next Sprint** turns investigation cards into one evidence-bound next-check memo, with contrary reports and other candidates kept visible. The order is a human investigation suggestion, not defect severity or roadmap priority.
 
-The portable [review-next-check skill](skills/review-next-check/SKILL.md) is a Markdown instruction file, not a new CLI command or automatically registered plugin. After `analyze`, ask an assistant with local file access to read it, then use your generated `report.json`:
+The portable [review-next-check skill](skills/review-next-check/SKILL.md) is a Markdown instruction file, not a new CLI command or automatically registered plugin. In the agent workflow above, the agent reads it after `analyze` and uses the generated `report.json`. For a manual offline replay, ask an assistant with local file access to read it:
 
 ```text
 Follow the bundled review-next-check SKILL.md.
@@ -204,6 +221,7 @@ Provider API shapes were checked against the current Bright Data Web Unlocker AP
 
 - https://docs.brightdata.com/api-reference/rest-api/unlocker/unlock-website
 - https://docs.brightdata.com/api-reference/scrapers/synchronous-requests
+- https://docs.brightdata.com/api-reference/scrapers/e-commerce-apis/amazon-reviews-collect-by-url
 - https://docs.brightdata.com/api-reference/scrapers/management-apis/monitor-progress
 - https://docs.brightdata.com/api-reference/scrapers/delivery-apis/download-snapshot
 
